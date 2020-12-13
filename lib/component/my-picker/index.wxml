@@ -1,0 +1,12 @@
+<!--lib/component/my-picker/index.wxml-->
+<view class="row">
+  <view class="name">
+  {{label}}
+  </view>
+  <view class="value">
+    <picker mode="date" start="2015-01-01" end="2030-12-31" value='2018-12-12' fields="day" bindchange='changeDate'>
+      {{value||text}}
+    </picker>
+  </view>
+</view>
+

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "van-checkbox": "/lib/vant/checkbox/index"
+  }
+}

@@ -1,0 +1,2 @@
+<!--lib/component/Phone/Phone.wxml-->
+<text bindtap="call" class="phone">{{phone}}</text>

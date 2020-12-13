@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/mall/mall",
+    "pages/reg/reg",
+    "pages/index/index",
+    "pages/houseOwner/houseOwner",
+    "pages/house/house",
+    "pages/my/my",
+    "pages/profit/profit",
+    "pages/TenantCenter/tenantCenter",
+    "pages/log/log"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-button": "/lib/vant/button/index",
+    "van-tabs": "/lib/vant/tabs/index",
+    "van-tab": "/lib/vant/tab/index",
+    "van-tabbar": "/lib/vant/tabbar/index",
+    "van-tabbar-item": "/lib/vant/tabbar-item/index",
+    "van-icon": "/lib/vant/icon/index",
+    "van-row": "/lib/vant/row/index",
+    "van-col": "/lib/vant/col/index",
+    "van-popup": "/lib/vant/popup/index",
+    "van-cell": "/lib/vant/cell/index",
+    "van-cell-group": "/lib/vant/cell-group/index",
+    "van-field": "/lib/vant/field/index",
+    "van-datetime-picker": "/lib/vant/datetime-picker/index",
+    "phone": "/lib/component/Phone/Phone"
+  },
+  "tabBar": {
+    "color": "#555",
+    "selectedColor": "#0061b2",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "房客管理",
+        "iconPath": "lib/img/zuke.png",
+        "selectedIconPath": "lib/img/zuke_o.png"
+      },
+      {
+        "pagePath": "pages/houseOwner/houseOwner",
+        "text": "房主管理",
+        "iconPath": "lib/img/houseOwner.png",
+        "selectedIconPath": "lib/img/houseOwner_o.png"
+      },
+      {
+        "pagePath": "pages/house/house",
+        "text": "房屋管理",
+        "iconPath": "lib/img/house.png",
+        "selectedIconPath": "lib/img/house_o.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "lib/img/my.png",
+        "selectedIconPath": "lib/img/my_o.png"
+      }
+    ]
+  }
+}

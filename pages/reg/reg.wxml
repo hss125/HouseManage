@@ -1,0 +1,49 @@
+<!--pages/reg/reg.wxml-->
+<view class="logo">
+  <image src="https://www.hss1129.cn/Content/Img/logo1.png"></image>
+</view>
+<van-cell-group>
+    <van-field
+      value="{{user.Name}}"
+      data-prop="user.Name"
+      bind:change="SynData"
+      label="账号"
+      placeholder="必须为手机号"
+      clearable
+      right-icon-class="custom-icon"
+      required
+    />
+    <van-field
+      value="{{user.PassWord}}"
+      data-prop="user.PassWord"
+      bind:change="SynData"
+      type="password"
+      label="密码"
+      placeholder="请输入密码"
+      required
+    />
+    <van-field
+      value="{{user.PassWord2}}"
+      data-prop="user.PassWord2"
+      bind:change="SynData"
+      type="password"
+      label="确认密码"
+      placeholder="请输入密码"
+      required
+    />
+    <van-field
+      value="{{user.RealName}}"
+      data-prop="user.RealName"
+      bind:change="SynData"
+      label="姓名"
+      placeholder="姓名"
+      clearable
+      right-icon-class="custom-icon"
+      required
+    />
+  </van-cell-group>
+  <view style="padding-top:25px">
+      <view class="btn-l" bindtap="reg">注册</view>
+  </view>
+  <view class="tabLogin">已有账号，<navigator url="../login/login" redirect>直接登录</navigator ></view>
+

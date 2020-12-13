@@ -1,0 +1,21 @@
+<view class="search">
+  <input bindinput ="changekey" placeholder="输入你要找房的地点" type="text"></input>
+  <view class="btn" bindtap="search">搜索</view>
+</view>
+<view class="search-list">
+  <view wx:for="{{searchList}}" data-latitude="{{it.latitude}}"  data-longitude="{{it.longitude}}" wx:key="index" wx:for-item="it" bindtap="planTo">{{it.name}}</view>
+</view>
+<view class="map_container"> 
+  <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="10" show-location="true" markers="{{markers}}" bindmarkertap="makertap"></map> 
+</view>
+<view class="place_info {{placeData.rooms?'open':''}}">
+  <view class="t1">地址：{{placeData.rooms[0].Community}}<view class="right"><van-icon bindtap="infoClose" name="close" /></view></view> 
+  <view class="room-item" wx:for="{{placeData.rooms}}" wx:for-item="it" wx:key="index">
+    <view class="t2">房间{{index+1}}：{{it.Building}} {{it.room.Name}}</view> 
+    <view class="t2">价格：{{it.room.Rent}}</view> 
+    <view class="t3">房东：{{it.RealName}} <phone phone="{{it.Phone}}"></phone></view>
+    <view class="img-list">
+      <image wx:for="{{it.room.paths}}" bindtap="prevImg" wx:for-item="img" wx:for-index="index2" wx:key="index" src="{{img}}" data-x="{{index}}" data-y="{{index2}}"></image>
+    </view>
+  </view>  
+</view> 

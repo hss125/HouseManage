@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-switch": "/lib/vant/switch/index",
+    "my-picker": "/lib/component/my-picker/index"
+  }
+}

@@ -1,0 +1,113 @@
+<!--pages/TenantCenter/tenantCenter.wxml-->
+<view style="height:5px"></view>
+<!-- <view class="form-row">
+    <view class="form-left">订阅消息</view>
+    <view class="form-left">
+      <van-switch
+        checked="{{ checked1 }}"
+        bind:change="subscribe"
+        size="20px"
+      />
+    </view>
+  </view> -->
+<van-cell-group title="个人信息">
+  <van-cell title="姓名" value="{{model.tenant.Name}}" />
+  <van-cell title="手机号" value="{{model.tenant.Phone}}" />
+</van-cell-group>
+<view wx:for="{{model.roomList}}" wx:key="index" wx:for-item="r">
+  <view class="room-title" wx:if="{{model.roomList.length>1}}">房间{{index+1}}</view>
+  <van-cell-group title="租房信息">
+    <van-cell title="小区" value="{{r.Community}}" />
+    <van-cell title="房间" value="{{r.Building}} {{r.Name}}" />
+    <van-cell title="交租方式" value="{{r.PayRentType}}" />
+    <van-cell title="房租" value="{{r.Rent}}" />
+    <van-cell title="交租日期" value="{{r.PayRentDate}}" />
+    <van-cell title="合同到期" value="{{r.Deadline}}" />
+    <van-cell title="押金" value="{{r.Deposit}}" />
+  </van-cell-group>
+  <van-cell-group title="房东信息">
+    <van-cell title="姓名" value="{{r.acc.RealName}}" />
+    <van-cell title="手机号" bind:click="call" id="{{r.acc.Phone}}" value="{{r.acc.Phone}}" />
+  </van-cell-group>
+  <view class="edit" style="padding-bottom:15px">
+    <van-button plain bindtap="openRepair" data-id="{{r.Id}}" size="small" block type="warning">
+          <text wx:if="{{model.roomList.length>1}}">房间{{index+1}}</text>报修
+    </van-button>
+  </view>
+</view>
+<view class="edit">
+  <van-button bindtap="editInfo" plain  size="small" block type="primary">
+         修改个人信息
+      </van-button>
+</view>
+
+<van-popup
+    show="{{ show.basic }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic" closeable
+  >
+    <view class="pop-con">
+        <view class="title">修改信息</view>
+        <view  class="pop-main">              
+            <van-field
+              value="{{tenant.Name}}"
+              data-prop="tenant.Name"
+              bind:change="SynRent"
+              label="姓名"
+              placeholder="姓名"
+              clearable
+              required
+            />
+            <van-field
+              value="{{tenant.Phone}}"
+              data-prop="tenant.Phone"
+              bind:change="SynRent"
+              label="手机号"
+              placeholder="手机号"
+              clearable
+              required
+            />
+            <van-field
+              value="{{tenant.PassWord}}"
+              data-prop="tenant.PassWord"
+              bind:change="SynRent"
+              label="密码"
+              placeholder="密码"
+              clearable
+              required
+            />
+        </view>
+         <view class="pop-bottom">
+            <van-button round bindtap="saveInfo" block type="info" native-type="submit">
+              保存
+            </van-button>
+          </view>
+    </view>    
+  </van-popup>
+
+<van-popup
+    show="{{ show.basic2 }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic2" closeable
+  >
+  <view class="pop-con">
+        <view class="title">在线报修</view>
+        <view  class="pop-main">              
+            <van-field
+              value="{{Detail}}"
+              data-prop="Detail"
+              bind:change="SynRent"
+              label="问题"
+              placeholder="问题"
+              clearable
+              required
+            />
+        <view class="resm">7天内报修次数不能超过3次</view>
+        </view>
+         <view class="pop-bottom">
+            <van-button round bindtap="Repair" block type="info" native-type="submit">
+              报修
+            </van-button>
+          </view>
+    </view>    
+  </van-popup>

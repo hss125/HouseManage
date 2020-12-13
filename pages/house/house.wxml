@@ -1,0 +1,389 @@
+<!--pages/house/house.wxml-->
+<wxs src = "../../utils/dater.wxs"  module = "dater" />
+  
+<view class="face{{face}}">
+  <view class="head">
+    房屋列表<view class="h-btn" bindtap="showBasic">新增</view>
+  </view>
+  <demo-block title="基础用法">
+  <van-popup
+    show="{{ show.basic }}"
+    custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic"
+    closeable
+  >
+  <view class="pop-con">
+    <view class="title">房屋信息编辑</view>
+    <view class="pop-main">
+    <demo-block title="自定义类型">
+  <van-cell-group>
+    <van-field
+      value="{{house.Community}}"
+      data-prop="Community"
+      label="小区"
+      placeholder="请输入小区名"
+      clearable
+      required
+      bind:change="houseChange"
+    />
+    <van-field
+      value="{{house.Building}}"
+      data-prop="Building"
+      bind:change="houseChange"
+      label="楼室"
+      placeholder="例如16#302"
+      clearable
+      required
+    />
+  </van-cell-group> 
+  <view class="form-box"></view>
+  <van-cell-group>
+    <my-picker label="拿房时间" value="{{house.TakeDate}}" prop="house.TakeDate" bind:change="onDateChange"></my-picker>
+    <van-popup show="{{showPicker}}" position="bottom">
+      <van-datetime-picker
+        type="date"
+        data-prop="TakeDate"
+        data-type="date"
+        bind:confirm="suredate1"
+        bind:cancel="hidePickerFun"
+      />
+    </van-popup>
+<van-field
+      value="{{house.Expiration}}"
+      data-prop="Expiration"
+      bind:change="houseChange"
+      label="合同期限(月)"
+      placeholder="请输入合同期限"
+      clearable
+      required
+      bind:click-icon="onClickIcon"
+    />
+  <van-field
+      value="{{house.CostPrice}}"
+      data-prop="CostPrice"
+      label="拿房价"
+      placeholder="请输入拿房价"
+      type="digit"
+      clearable
+      bind:change="houseChange"
+    />
+     <van-field
+      value="{{house.PayRentType}}"
+      data-prop="PayRentType"
+      bind:change="houseChange"
+      label="交租方式"
+      placeholder="交几压几"
+      clearable
+      bind:click-icon="onClickIcon"
+    />
+    <van-field
+      value="{{house.Deposit}}"
+      data-prop="Deposit"
+      bind:change="houseChange"
+      label="押金"
+      placeholder="拿房押金"
+      clearable
+      bind:click-icon="onClickIcon"
+    />
+    <view hidden="{{house.Id}}">
+      <van-field
+        value="{{house.PayMoney}}"
+        data-prop="PayMoney"
+        label="拿房支出金额"
+        placeholder="非新房不填"
+        type="digit"
+        clearable
+        bind:change="houseChange"
+      />
+    </view>
+    <my-picker label="下次交租时间" value="{{house.PayRentDate}}" prop="house.PayRentDate" bind:change="onDateChange"></my-picker>
+    <view class="form-box"></view>
+    <van-field
+      value="{{house.Owner}}"
+      data-prop="Owner"
+      bind:change="houseChange"
+      label="房主"
+      placeholder="请输入房主姓名"
+      clearable
+      bind:click-icon="onClickIcon"
+    />
+    <van-field
+      value="{{house.Card}}"
+      data-prop="Card"
+      bind:change="houseChange"
+      label="卡号"
+      placeholder="请输入交租卡号"
+      clearable
+      bind:click-icon="onClickIcon"
+    />
+    <van-field
+      value="{{house.Contact}}"
+      data-prop="Contact"
+      bind:change="houseChange"
+      label="房主联系方式"
+      placeholder="请输入联系方式"
+      clearable
+    />
+    <view class="form-box"></view>
+    <van-field
+      value="{{house.Remarks}}"
+      data-prop="Remarks"
+      bind:change="houseChange"
+      label="备注"
+      placeholder="备注"
+      clearable
+    />
+      
+  </van-cell-group>
+  <view style="height:8px"></view>
+  <view wx:for="{{room}}" wx:key="i" wx:for-item="it">
+      <view class="house-title">房间{{index+1}}<view class="bt" bindtap="addRoom" wx:if="{{index==0}}">新增</view><view wx:else class="bt del" data-index="{{index}}" bindtap="delRoom">删除</view></view>
+      <van-cell-group>
+        <van-field
+          value="{{ it.Name }}"
+          data-name="Name"
+          data-index="{{index}}"
+          label="房间"
+          placeholder="请输入房间名"
+          clearable
+          required
+          bind:change="roomChange"
+        />
+        <van-field
+          value="{{ it.Rent }}"
+          data-name="Rent"
+          data-index="{{index}}"
+          label="租金"
+          placeholder="请输入租金"
+          clearable
+          required
+          bind:change="roomChange"
+        /> 
+        <!-- <view class="uploader">
+          <view class="title">图片上传(最多可上传5张)</view>
+          <view class="view">
+              <van-uploader
+              name="{{index}}"
+              file-list="{{ it.fileList }}"
+              bind:after-read="afterRead"
+              bind:delete="delete"
+              bind:click-preview="clickPreview"
+              max-count="{{ 5 }}"
+            />
+          </view>      
+        </view>      -->
+      </van-cell-group>
+  </view>
+</demo-block>
+    </view>
+    <view class="pop-bottom">
+      <van-button round bindtap="addHouse" block type="info" native-type="submit">
+        提交
+      </van-button>
+      </view>
+    </view>
+    
+    </van-popup>
+  </demo-block>
+  <view class="h2">共{{houseList.length}}套房,{{roomCount}}个房间<label  hidden="{{!Profit}}">,总利润(月):<label style="color:yellowgreen">{{totalprofit}}</label></label>
+        <view class="p-r">
+            <van-checkbox
+            value="{{ Profit }}"
+            data-key="checkbox1"
+            custom-class="demo-checkbox"
+            bind:change="ProfitChange"
+            icon-size="15px"
+          >
+            收益模式
+          </van-checkbox>        
+        </view> 
+      </view>
+    <view style="height:0px"></view>
+    <view class="tb-box">
+     <view class="tb-left">
+        <view class="table">
+          <view class="thead">
+              <view class="tr bg-w">
+                  <view class="th">
+                    <view style="top:{{thTop}}px;z-index: 2" class="th-float">小区</view>
+                  </view>
+              </view>
+          </view>
+          <view class="tbody">
+              <view class="tr" wx:for="{{houseList}}" wx:for-item="it" wx:key="index">
+                  <view class="td {{index%2==1?'bg-g':''}}">{{it.house.Community}} 
+                  <view style="display: inline;padding-right: 2px;" data-index="{{index}}" bindtap="openRoom">{{it.house.Building}}<i class="arrow-down"></i></view>
+                  </view>
+              </view>
+          </view>
+      </view>
+     </view>
+     <view class="tb-right">
+      <view class="table">
+        <view class="thead">
+          <view class="tr bg-w">
+              <!-- <view class="th"><view class="th-float">小区</view></view>
+              <view class="th"><view class="th-float">室</view></view> -->
+              <view class="th"><view class="th-float" style="top:{{thTop}}px">拿房价</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">交租日期</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">剩余天数</view></view>
+              <view class="th" hidden="{{!Profit}}"><view style="top:{{thTop}}px" class="th-float">出租价</view></view>
+              <view class="th" hidden="{{!Profit}}"><view style="top:{{thTop}}px" class="th-float">收益</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">拿房时间</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">到期时间</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">剩余天数</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">房主</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">房主联系方式</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">交租方式</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">押金</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">卡号</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">操作</view></view>
+              <view class="th" hidden="{{Profit}}"><view style="top:{{thTop}}px" class="th-float">备注</view></view>
+            </view>
+        </view>            
+        <view class="tbody">
+            <view class="tr fl{{it.house.FirstLetter}} {{openIndex==index?'open':''}} tr {{index%2==1?'bg-g':''}}" wx:for="{{houseList}}" wx:for-item="it" wx:key="index" >
+                      <!-- <view class="td">{{it.house.Community}}</view>
+                      <view class="td" hidden="{{!Profit}}">{{it.house.Building}}</view> -->
+                      <!-- <view class="td" hidden="{{Profit}}" data-index="{{index}}" bindtap="openRoom">{{it.house.Building}}<i class="arrow-down"></i></view> -->
+                      <view class="td">{{it.house.CostPrice}}</view>
+                      <view class="td" hidden="{{Profit}}">{{dater.formatDate(it.house.PayRentDate,'YY-MM-DD')}}</view>
+                      <view class="td" hidden="{{Profit}}">{{dater.getDays(it.house.PayRentDate)}}</view>
+                      <view class="td" hidden="{{!Profit}}">{{it.house.Rent}}</view>
+                      <view class="td" hidden="{{!Profit}}" style="color:yellowgreen;text-align: left;">{{it.house.Profit}}</view>
+                      <view class="td" hidden="{{Profit}}">{{dater.formatDate(it.house.TakeDate,'YY-MM-DD')}}</view>
+                      <view class="td" hidden="{{Profit}}">{{dater.formatDate(it.house.Deadline,'YY-MM-DD')}}</view>
+                      <view class="td" hidden="{{Profit}}">{{dater.getDays(it.house.Deadline)}}</view>
+                      <view class="td" hidden="{{Profit}}">{{it.house.Owner}}</view>
+                      <view class="td" hidden="{{Profit}}">{{it.house.Contact}}</view>
+                      <view class="td" hidden="{{Profit}}">{{it.house.PayRentType}}</view>
+                      <view class="td" hidden="{{Profit}}">{{it.house.Deposit}}</view>
+                      <view class="td" hidden="{{Profit}}">{{it.house.Card?it.house.Card:' 无 '}}</view>
+                      <view class="td handle" hidden="{{Profit}}">
+                          <van-icon name="edit" data-index="{{index}}" bindtap="edit" size="16"/>
+                          <van-icon data-id="{{it.house.Id}}" data-name="{{it.house.Community+it.house.Building}}" name="close" bindtap="del"   size="16"/>
+                      </view>
+                      <view class="td" hidden="{{Profit}}">{{it.house.Remarks}}</view>
+              <view class="detail" hidden="{{Profit}}">
+                <view wx:if="{{it.more}}">
+                  <view class="h1">房间列表<text class="h1-name">-{{it.house.Community}} {{it.house.Building}}</text><view class="close"><van-icon  data-index="-1" bindtap="openRoom" size="22" name="clear" /></view></view>
+                  <view class="d-item"  wx:for="{{it.rooms}}" wx:for-item="r" wx:key="index" wx:for-index="index1">
+                      <van-row class="d-title">
+                        <van-col span="8"><view style="padding-left:6px">{{r.Name}}</view></van-col>
+                        <van-col span="8">￥{{r.Rent}}</van-col>
+                        <van-col span="8">
+                          <view style="text-align: right;padding-right:10px">
+                            <van-tag wx:if="{{r.Status!=1}}" type="warning">待出租</van-tag>
+                            <van-tag wx:if="{{r.Status==1}}" type="success">出租中</van-tag>
+                          </view>                          
+                        </van-col>
+                      </van-row>
+                      <view class="col" wx:if="{{r.Status==1}}">租客信息: {{r.Tenants}} <phone phone="{{r.Contact}}"></phone></view>
+                      <view class="col" wx:if="{{r.Status==1}}">交租日期: {{r.PayRentDate}}(剩余{{dater.getDays(r.PayRentDate)}}天)</view>
+                      <view class="col" wx:if="{{r.Status==1}}">交租方式: {{r.PayRentType}} 押金({{r.Deposit}})</view>
+                      <view class="col" wx:if="{{r.Status==1}}">合同日期: {{r.ContractDate}} 至 {{r.Deadline}}(剩{{dater.getDays(r.Deadline)}}天)</view>
+                      <view class="col" wx:if="{{r.Status==1}}">备注: {{r.Remarks}}</view>
+                      <view class="d-bottom" wx:if="{{r.Status==1}}">
+                        <view class="my-btn" data-id="{{r.Id}}" data-x="{{index}}" data-y="{{index1}}" bindtap="roomEdit">编辑</view>
+                        <view class="my-btn" data-id="{{r.Id}}" bindtap="checkOut">退房</view>
+                        <view class="my-btn"  wx:if="{{!r.TenantId && !r.delete}}" data-id="{{r.Id}}" bindtap="creatTenant" data-x="{{index}}" data-y="{{index1}}">生成租客账号</view>
+                      </view>
+                    </view>
+                </view>                  
+              </view>
+            </view>               
+          </view>
+        </view>
+     </view>
+     
+    </view>
+    
+    <view class="position">
+      <view></view>
+      <view>
+          <label bindtap="scrollTo" data-index="{{fl}}" wx:for="{{firstLetter}}" wx:key="index" wx:for-item="fl">{{fl}}</label>
+          <label>
+              <van-icon name="replay" bindtap="refresh"   size="16"/>
+          </label>
+      </view>
+    </view>
+
+    <van-popup
+    show="{{ show.basic2 }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic2" closeable
+  >
+    <view class="pop-con">
+        <view class="title">租客信息<text class="h1-name">-{{tenantHouse.Community}} {{tenantHouse.Building}} {{tenent.Name}}</text></view>
+        <view  class="pop-main">  
+            <my-picker label="签约时间" value="{{tenent.ContractDate}}" prop="tenent.ContractDate" bind:change="onDateChange"></my-picker>
+            <my-picker label="到期时间" value="{{tenent.Deadline}}" prop="tenent.Deadline" bind:change="onDateChange"></my-picker>
+            <view class="form-box"></view>
+            <van-field
+              value="{{tenent.Rent}}"
+              data-prop="tenent.Rent"
+              bind:change="SynRent"
+              label="月租金"
+              placeholder="月租金"
+              clearable
+              required
+            />
+            <van-field
+              value="{{tenent.PayRentType}}"
+              data-prop="tenent.PayRentType"
+              bind:change="SynRent"
+              label="收租方式"
+              placeholder="收租方式"
+              clearable
+            />
+            <van-field
+              value="{{tenent.Deposit}}"
+              data-prop="tenent.Deposit"
+              bind:change="SynRent"
+              label="押金"
+              placeholder="押金"
+              clearable
+            />
+            <my-picker label="下次交租日" value="{{tenent.PayRentDate}}" prop="tenent.PayRentDate" bind:change="onDateChange"></my-picker>
+            <view class="form-box"></view>
+            <van-field
+              value="{{tenent.Tenants}}"
+              data-prop="tenent.Tenants"
+              bind:change="SynRent"
+              label="租客姓名"
+              placeholder="租客姓名"
+              clearable
+              required
+            />
+            <van-field
+              value="{{tenent.Contact}}"
+              data-prop="tenent.Contact"
+              bind:change="SynRent"
+              label="手机号"
+              placeholder="手机号"
+              clearable
+              required
+            />
+            <view class="form-box"></view>
+            <van-field
+              value="{{tenent.Remarks}}"
+              data-prop="tenent.Remarks"
+              bind:change="SynRent"
+              label="备注"
+              placeholder="备注"
+              clearable
+              required
+            />
+        </view>
+         <view class="pop-bottom">
+            <van-button round bindtap="roomSave" block type="info" native-type="submit">
+              修改
+            </van-button>
+          </view>
+    </view>    
+  </van-popup>
+</view>
+
+
+      
+  <view style="position: fixed;left: -600px;"><canvas style="width: {{cw}}px; height: {{ch}}px;" canvas-id="firstCanvas"></canvas></view>

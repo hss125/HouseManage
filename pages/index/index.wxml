@@ -1,0 +1,340 @@
+<!--index.wxml-->
+<view class="face{{face}}">
+  <view>
+   <van-tabs sticky>
+    <van-tab
+      title="待出租"
+    >      
+    <view class="content tab-con">
+    <scroll-view scroll-x="true">
+    <view class="table">
+            <view class="tr bg-w">
+              <view class="th">小区</view>
+              <view class="th">室</view>
+              <view class="th ">房间</view>
+              <view class="th ">价格</view>
+              <view class="th ">操作</view>
+            </view>
+            <block>
+             <view class="tr {{index%2==0?'':'bg-g'}}" wx:for="{{model.forRent}}" wx:key="index" wx:for-item="f">
+                <view class="td">{{f.house.Community}}</view>
+                <view class="td">{{f.house.Building}}</view>
+                <view class="td">{{f.room.Name}}</view>
+                <view class="td">{{f.room.Rent}}</view>
+                <view class="td">
+                <view class="czbt" data-index="{{index}}" bindtap="rent" data-rent="{{f.room.Rent}}" data-id="{{f.room.Id}}">出租</view>
+                </view>
+              </view>
+          </block>
+        </view>
+        <view style="padding-top:15px">
+          <van-button plain  size="small" bindtap="copy" block type="info">
+          生成待租信息
+          </van-button>
+        </view>        
+    </scroll-view>
+        
+      </view>
+    </van-tab>
+    <van-tab title="待收租">      
+        <view class="content tab-con">
+    <scroll-view scroll-x="true">
+    <view class="table">
+            <view class="tr bg-w">
+              <view class="th">小区</view>
+              <view class="th">室</view>
+              <view class="th ">房间</view>
+              <view class="th ">应交时间</view>
+              <view class="th ">剩余天数</view>
+              <view class="th ">操作</view>
+              <view class="th ">租金</view>
+              <view class="th ">租客</view>
+              <view class="th ">联系方式</view>
+              <view class="th ">操作</view>
+            </view>
+            <block>
+             <view  class="tr {{index%2==0?'':'bg-g'}}" wx:for="{{model.payRent}}" wx:key="index" wx:for-item="p">
+                <view class="td">{{p.house.Community}}</view>
+                <view class="td">{{p.house.Building}}</view>
+                <view class="td">{{p.room.Name}}</view>
+                <view class="td" style="color:green">{{p.room.PayRentDate}}</view>
+                <view class="td">{{p.room.SupDays}}</view>
+                <view class="td">
+                  <view class="czbt" data-index="{{index}}"  bindtap="payrent" data-id="{{p.room.Id}}">交租</view>
+                </view>
+                <view class="td">{{p.room.Rent}}</view>
+                <view class="td">{{p.room.Tenants}}</view>
+                <view class="td"><phone phone="{{p.room.Contact}}"></phone></view>
+                <view class="td handle">
+                  <view class="czbt"  bindtap="checkOut" data-index="{{index}}">退房</view>
+                </view>
+              </view>
+          </block>
+        </view>
+    </scroll-view>        
+      </view>
+    </van-tab>
+    
+
+     <van-tab title="合同到期">      
+        <view class="content tab-con">
+    <scroll-view scroll-x="true">
+    <view class="table">
+            <view class="tr bg-w">
+              <view class="th">小区</view>
+              <view class="th">室</view>
+              <view class="th ">房间</view>
+              <view class="th ">到期时间</view>
+              <view class="th ">剩余天数</view>
+              <view class="th ">操作</view>
+              <view class="th ">租客</view>
+              <view class="th ">联系方式</view>
+              <view class="th ">租金</view>
+               <view class="th ">首次签约时间</view>
+            </view>
+            <block>
+             <view class="tr {{index%2==0?'':'bg-g'}}" wx:for="{{model.contractExpires}}" wx:key="index" wx:for-item="p">
+               <view class="td">{{p.house.Community}}</view>
+                <view class="td">{{p.house.Building}}</view>
+                <view class="td">{{p.room.Name}}</view>
+                <view class="td">{{p.room.Deadline}}</view>
+                <view class="td">{{p.room.SupDays}}</view>
+                <view class="td">
+                  <view class="czbt"  data-index="{{index}}"  bindtap="contractRenewal" data-rent="{{p.room.Rent}}" data-id="{{p.room.Id}}">续签</view>
+                </view>
+                <view class="td">{{p.room.Tenants}}</view>
+                <view class="td"><phone phone="{{p.room.Contact}}"></phone></view>
+                <view class="td">{{p.room.Rent}}</view>
+                <view class="td">{{p.room.ContractDate}}</view>
+              </view>
+          </block>
+        </view>
+    </scroll-view>        
+      </view>
+    </van-tab>
+<van-tab title="报修记录">      
+        <view class="content tab-con">
+    <scroll-view scroll-x="true">
+    <view class="table">
+            <view class="tr bg-w">
+              <view class="th">小区</view>
+              <view class="th">室</view>
+              <view class="th ">房间</view>
+              <view class="th ">维修内容</view>
+              <view class="th ">提出时间</view>
+              <view class="th ">租客</view>
+              <view class="th ">联系方式</view>
+              <view class="th ">操作</view>
+            </view>
+            <block>
+             <view class="tr {{index%2==0?'':'bg-g'}}" wx:for="{{model.repair}}" wx:key="index" wx:for-item="r" hidden="{{r.delete}}">
+                <view class="td">{{r.Community}}</view>
+                <view class="td">{{r.Building}}</view>
+                <view class="td">{{r.Name}}</view>
+                 <view class="td">{{r.repa.Detail}}</view>
+                <view class="td">{{r.repa.InsertDate}}</view>
+                <view class="td">{{r.Tenants}}</view>
+                <view class="td"><phone phone="{{r.Contact}}"></phone></view>
+                <view class="td handle">
+                  <view class="czbt" data-id="{{r.repa.Id}}" data-index="{{index}}" bindtap="repaired">完成</view>
+                </view>
+              </view>
+          </block>
+        </view>
+    </scroll-view>
+        
+      </view>
+    </van-tab>
+
+  </van-tabs>
+</view>
+
+<demo-block title="基础用法">
+  <van-popup
+    show="{{ show.basic }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic" closeable
+  >
+    <view class="pop-con">
+        <view class="title">出租<text class="h1-name">-{{payRentRoom.house.Community}} {{payRentRoom.house.Building}} {{payRentRoom.room.Name}}</text></view>
+        <view  class="pop-main">
+              <van-field
+                value="{{ rent.ContractDate }}"
+                data-field="rent.ContractDate"
+                label="签约时间"
+                placeholder="请选择"
+                clearable
+                required
+                readonly 
+                bindtap="showPickerFun"
+              />
+              <van-popup show="{{showPicker}}" position="bottom">
+                <van-datetime-picker
+                  type="date"
+                  data-prop="rent.ContractDate"
+                  data-type="date"
+                  min-date="{{ minDate }}"
+                  max-date="{{ maxDate }}"
+                  bind:confirm="suredate1"
+                  bind:cancel="hidePickerFun"
+                />
+            </van-popup>
+            <van-field
+              value="{{rent.Expiration}}"
+              data-prop="rent.Expiration"
+              label="合同期限(月)"
+              placeholder="请输入合同期限"
+              clearable
+              required
+              bind:change="SynRent"
+            />
+            <view class="form-box"></view>
+            <van-field
+              value="{{rent.Rent}}"
+              data-prop="rent.Rent"
+              bind:change="SynRent"
+              label="月租金"
+              placeholder="月租金"
+              clearable
+              required
+            />
+            <van-field
+              value="{{rent.PayRentType}}"
+              data-prop="rent.PayRentType"
+              bindtap="PayRentType"
+              label="收租方式"
+              placeholder="请选择"
+              clearable
+              readonly
+              required
+            />
+            <van-field
+              value="{{rent.Deposit}}"
+              data-prop="rent.Deposit"
+              bind:change="SynRent"
+              label="押金"
+              placeholder="押金"
+              clearable
+            />
+            <!-- <van-field
+              value="{{rent.IsDelete}}"
+              data-prop="rent.IsDelete"
+              bind:change="SynRent"
+              label="共收款"
+              placeholder="非新出租不填"
+              clearable
+            /> -->
+            <van-field
+              value="{{rent.PayRentDate}}"
+              data-field="rent.PayRentDate"
+              bindtap="showPickerFun"
+              label="下次交租日期"
+              placeholder="请选择"
+              clearable
+              required
+            />
+            <view class="form-box"></view>
+            <van-field
+              value="{{rent.Tenants}}"
+              data-prop="rent.Tenants"
+              bind:change="SynRent"
+              label="租客"
+              placeholder="租客姓名"
+              clearable
+              required
+            />
+            <van-field
+              value="{{rent.Contact}}"
+              data-prop="rent.Contact"
+              bind:change="SynRent"
+              label="联系方式"
+              placeholder="租客联系方式"
+              clearable
+              required
+            />
+        </view>
+         <view class="pop-bottom">
+            <van-button round bindtap="saveRent" block type="info" native-type="submit">
+              出租
+            </van-button>
+          </view>
+    </view>    
+  </van-popup>
+</demo-block>
+
+<demo-block title="基础用法">
+  <van-popup
+    show="{{ show.basic2 }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic2" closeable
+  >
+    <view class="pop-con">
+        <view class="title">交租信息<text class="h1-name">-{{payRentRoom.house.Community}} {{payRentRoom.house.Building}} {{payRentRoom.room.Name}}</text></view>
+        <view  class="pop-main">  
+          <van-field
+              value="{{payRentRoom.room.PayRentDate}}"
+              label="应交日期"
+              readonly
+            /> 
+          <van-field
+              value="{{payRentRoom.room.Rent}}"
+              label="月租金"
+              readonly
+            />            
+            <van-field
+              value="{{rent.PayRentMonths}}"
+              data-prop="rent.PayRentMonths"
+              bind:change="SynRent"
+              label="交租月数"
+              placeholder="交租月数"
+              clearable
+              required
+            />
+        </view>
+         <view class="pop-bottom">
+           <view style="color: #dd6161;font-size: 13px;text-align: center;">确认信息：{{payRentRoom.house.Community}} {{payRentRoom.house.Building}} {{payRentRoom.room.Name}} 交租{{rent.PayRentMonths}}个月</view>
+            <van-button round bindtap="savePayRent" block type="info" native-type="submit">
+              交租
+            </van-button>
+          </view>
+    </view>    
+  </van-popup>
+</demo-block>
+
+<demo-block title="基础用法">
+  <van-popup
+    show="{{ show.basic3 }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic3" closeable
+  >
+    <view class="pop-con">
+        <view class="title">续签信息<text class="h1-name">-{{RenewalRoom.house.Community}} {{RenewalRoom.house.Building}} {{RenewalRoom.room.Name}}</text></view>
+        <view  class="pop-main">              
+            <van-field
+              value="{{Renewal.Expiration}}"
+              data-prop="Renewal.Expiration"
+              bind:change="SynRent"
+              label="续签月数"
+              placeholder="续签月数"
+              clearable
+              required
+            />
+            <van-field
+              value="{{Renewal.Rent}}"
+              data-prop="Renewal.Rent"
+              bind:change="SynRent"
+              label="续签后房租"
+              placeholder="新租金"
+              clearable
+              required
+            />
+        </view>
+         <view class="pop-bottom">
+            <van-button round bindtap="saveContractRenewal" block type="info" native-type="submit">
+              续签
+            </van-button>
+          </view>
+      </view>    
+    </van-popup>
+  </demo-block>
+</view>

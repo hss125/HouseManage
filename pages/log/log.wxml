@@ -1,0 +1,27 @@
+<wxs src = "../../utils/dater.wxs"  module = "dater" />
+<view class="">
+  <van-nav-bar
+  title="操作日志"
+  left-text="返回"
+  left-arrow
+  fixed="true"
+  bind:click-left="onClickLeft"
+/>
+<scroll-view scroll-x="true">
+    <view style="height:65px;"></view>
+    <view class="table">
+            <view class="tr bg-w">
+              <view class="th">类型</view>
+              <view class="th ">操作时间</view>
+              <view class="th">操作内容</view>
+            </view>
+            <block>
+             <view class="tr {{index%2==1?'bg-g':''}}" wx:for="{{logs}}" wx:key="Id" wx:for-item="m">
+                <view class="td">{{m.Type}}</view>
+                <view class="td">{{dater.formatDate(m.InsertDate,'YY-MM-DD hh-mm')}}</view>
+                <view class="td">{{m.Old}}</view>
+              </view>
+          </block>
+        </view>
+    </scroll-view>
+</view>

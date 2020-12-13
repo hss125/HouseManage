@@ -1,0 +1,15 @@
+/* pages/mall/mall.wxss */
+.map_container{ height: calc(100vh - 30px); width: 100%; } 
+.map {height: 100%;width: 100%; }
+.place_info{box-shadow: 0 -3px 3px rgba(0,0,0,.1);position: fixed;left: 0;right: 0;bottom: 0;padding-bottom: 8px;background-color: #fff;height: calc(60vh);overflow-y: auto;-webkit-overflow-scrolling:touch;bottom: -65vh;transition: all .3s;}
+.place_info .t1{line-height: 30px;padding-left: 10px;}
+.place_info .t2{line-height: 20px;font-size: 14px;color: #555;}
+.place_info .t3{line-height: 20px;font-size: 13px;color: #555;}
+.search{position: fixed;left: 30px;top: 10px;background: #fff;z-index: 2;display: flex;font-size: 14px;box-shadow: 0 2px 3px rgba(0,0,0,.1);padding-left: 5px;}
+.search .btn{background: #1989fa;color: #fff;padding: 3px 6px;}
+.search-list{position: fixed;left: 30px;top:35px;background: #fff;z-index: 2;width: 158px;box-shadow: 0 2px 3px rgba(0,0,0,.1);font-size: 13px;}
+.search-list view{padding-left: 6px;line-height: 26px;border-top: 1px solid #f1efef;}
+.room-item{border-top: 4px solid #f5f5f5;padding:5px 10px;}
+.place_info .t1 .right{float: right;padding-right: 12px;font-size: 22px;padding-top: 2px;color: #999;}
+.place_info.open{bottom: 0;}
+.img-list image{width: 60px; height: 60px; margin-right: 2px; margin-top: 2px; }

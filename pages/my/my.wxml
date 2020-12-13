@@ -1,0 +1,61 @@
+<!--pages/my.wxml-->
+<view class="face{{face1}}">
+  <view class="user-top">
+     <van-row>
+          <van-col span="8">
+            <view class="value">{{model.rev||0}}</view>
+            <view class="name">本月收租</view>
+          </van-col>
+          <van-col span="8">
+            <view class="value">{{model.revCount}}</view>
+            <view class="name">收租个数</view>
+          </van-col>
+          <van-col span="8">
+              <view class="value">{{model.exp||0}}</view>
+              <view class="name">本月交租</view>
+          </van-col>
+    </van-row>
+</view>
+<demo-block title="展示图标">
+  <van-cell is-link
+    title="收租记录"
+    value=""
+    icon="balance-list-o"
+    border="{{ false }}"
+  />
+  <van-cell is-link
+    title="交租记录"
+    value=""
+    icon="balance-list-o"
+    border="{{ false }}"
+  />
+</demo-block>
+<!-- <view style="height:12px"></view>
+ <view class="form-row">
+    <view class="form-left"><van-icon name="volume-o" size="16"/>报修提醒</view>
+    <view class="form-left">
+      <switch checked="{{Checked}}" bindchange="switch1Change"/>
+    </view>
+  </view> -->
+  <view style="height:12px"></view>
+  <van-cell title="字体" is-link value="{{face}}" icon="browsing-history-o" bind:click="typeFace"/>
+  <view style="height:12px"></view>
+  <demo-block title="展示图标">
+    <van-cell is-link
+      title="操作日志"
+      value=""
+      icon="label-o"
+      border="{{ false }}"    
+      bind:click="logs"
+    />
+    <van-cell is-link
+      title="退出"
+      value=""
+      icon="manager-o"
+      border="{{ false }}"
+      bind:click="logout"
+    />
+  </demo-block>
+</view>
+
+

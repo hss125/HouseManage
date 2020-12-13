@@ -1,0 +1,12 @@
+/* pages/login/login.wxss */
+page{background: #f8f8fa;}
+.logo{text-align: center;padding-top: 60px;padding-bottom: 30px;}
+.logo image{width: 200px;height: 50px;}
+.foot{text-align: center;font-size: 13px;padding-top: 20px;color: #666;}
+.foot text{margin: 0 8px;}
+.foot navigator{display: inline;margin: 0 8px;}
+.video-grey{position: fixed;left: 0;top: 0;right: 0;bottom: 0;background: rgba(0,0,0,.5);z-index: 8;}
+.video-box{position: fixed;left: 15px;top: 15px;right: 15px;bottom: 15px;background: #fff;z-index: 9;padding: 0 8px;}
+.contact-us{position: fixed;left: 20px;right:20px;top: 165px;background: #fff;padding:10px;box-shadow: 0 2px 5px rgba(0,0,0,.2);z-index: 5;}
+.ewm{padding-top: 10px;}
+.ewm image{width: 160px;height: 160px;}

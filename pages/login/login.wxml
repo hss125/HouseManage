@@ -1,0 +1,73 @@
+<!--pages/login/login.wxml-->
+<view class="logo">
+  <image src="https://www.songshan.work/Content/Img/logo1.png"></image>
+</view>
+<van-cell-group>
+    <van-field
+      value="{{user.Name}}"
+      data-prop="user.Name"
+      bind:change="SynData"
+      label="用户名"
+      placeholder="请输入用户名"
+      clearable
+      right-icon-class="custom-icon"
+      required
+    />
+    <van-field
+      value="{{user.PassWord}}"
+      data-prop="user.PassWord"
+      bind:change="SynData"
+      type="password"
+      label="密码"
+      placeholder="请输入密码"
+      required
+      border="{{ false }}"
+    />
+  </van-cell-group>
+  <view class="form-row">
+    <view class="form-left">租客登录</view>
+    <view class="form-left">
+      <van-switch
+        checked="{{ checked1 }}"
+        bind:change="LoginType"
+        size="20px"
+      />
+    </view>
+  </view>
+  <view style="padding-top:25px" hidden="{{checked1}}">
+      <view class="btn-l" bindtap="login">登录</view>
+  </view>
+   <view style="padding-top:25px" hidden="{{!checked1}}">
+       <view class="btn-l" bindtap="login2">租客登录</view>
+  </view>
+  <view class="foot">
+    <text bindtap="videoStart">系统介绍</text>|<text bindtap="ewmStart">意见建议</text>|<navigator url="../reg/reg">房东注册</navigator>|<navigator url="../mall/mall">待租房屋</navigator>
+  </view>
+  <view class="video-grey" wx:if="{{video}}"></view>
+  <view class="video-box" wx:if="{{video}}">
+    <view style="font-size:14px;line-height: 22px;padding:9px 0;">系统功能介绍<van-icon name="clear" bindtap="videoClose" style="float:right" size="20"/></view>
+    <video src="https://www.hss1129.cn/Content/Img/系统介绍.mp4" binderror="videoErrorCallback" style="width:100%;height:calc(100% - 65px)"></video>
+  </view>
+  <view class="contact-us" wx:if="{{ewm}}">
+    <view><van-icon name="clear" bindtap="ewmClose" style="float:right" size="20"/></view>
+    <view>意见建议</view>
+    <view class="ewm">
+      <van-field
+        value="{{suggestion.Phone}}"
+        data-prop="suggestion.Phone"
+        bind:change="SynData"
+        label="联系方式"
+        placeholder="联系方式"
+        required
+      />
+      <van-field
+        value="{{suggestion.Suggestion1}}"
+        data-prop="suggestion.Suggestion1"
+        bind:change="SynData"
+        label="内容"
+        placeholder="内容"
+        required
+      />
+      <view class="btn-l" bindtap="suggestion" style="margin-top:10px">提交</view>
+    </view>
+  </view>

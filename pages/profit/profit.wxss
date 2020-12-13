@@ -1,0 +1,5 @@
+/* pages/profit/profit.wxss */
+.van-nav-bar{border-bottom: 1px solid #ddd;}
+.zsy{font-size:12px;padding-left: 10px;padding-top: 8px;color: #666;}
+.zsy label{font-weight: bold;}
+.yg{color: yellowgreen;}

@@ -1,0 +1,27 @@
+/* pages/my.wxss */
+page{
+  background: rgb(248, 248, 250);
+}
+.user-top{
+  height: 80px;
+  margin: 12px auto;
+  width: calc(100vw - 24px);
+  border-radius: 6px;
+  background: linear-gradient(90deg,#eb3c3c,#ff7459);
+  color: #fff;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+.user-top .value{
+  text-align: center;
+font-weight: bold;
+padding-top: 15px;
+padding-bottom: 8px;
+font-size: 15px;
+}
+.user-top .name{
+text-align: center;
+font-size: 13px;
+}
+switch {zoom: .8;}
+.form-left{padding-left: 12px;}

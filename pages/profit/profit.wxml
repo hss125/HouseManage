@@ -1,0 +1,130 @@
+<!--pages/profit/profit.wxml-->
+ <van-nav-bar
+    title="收益计算"
+    left-text="返回"
+    left-arrow
+    bind:click-left="onClickLeft"
+    bind:click-right="onClickRight"
+  />
+<view class="zsy">预计总收益(月)：<label class="yg">123000.00</label></view>
+<view class="content tab-con">
+    <scroll-view scroll-x="true">
+    <view class="table" style="">
+            <view class="tr bg-w">
+              <view class="th">小区</view>
+              <view class="th">室</view>
+              <view class="th ">拿房价</view>
+              <view class="th ">出租总价</view>
+              <view class="th ">利润</view>
+            </view>
+            <block>
+             <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+              <view class="tr">
+                <view class="td">滨浦新苑九村</view>
+                <view class="td">16号301</view>
+                <view class="td">3200</view>
+                <view class="td">4500</view>
+                 <view class="td yg">1200</view>
+              </view>
+          </block>
+        </view>
+    </scroll-view>
+        
+      </view>

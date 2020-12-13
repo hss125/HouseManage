@@ -1,0 +1,6 @@
+/* pages/reg/reg.wxss */
+page{background: #f8f8fa;}
+.logo{text-align: center;padding-top: 60px;padding-bottom: 30px;}
+.logo image{width: 200px;height: 50px;}
+.tabLogin{text-align: center;font-size: 13px;color: #555;padding-top: 15px;}
+.tabLogin navigator{display: inline;color: #1989fa;}
