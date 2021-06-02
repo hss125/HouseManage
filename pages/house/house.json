@@ -4,6 +4,7 @@
     "van-icon": "/lib/vant/icon/index",
     "van-checkbox": "/lib/vant/checkbox/index",
     "my-picker": "/lib/component/my-picker/index",
-    "van-uploader": "/lib/vant/uploader/index"
+    "van-uploader": "/lib/vant/uploader/index",
+    "van-steps": "/lib/vant/steps/index"
   }
 }

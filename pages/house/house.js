@@ -16,7 +16,8 @@ Page({
     houseList:[],
     openIndex:-1,
     roomCount:0,
-    tenent:{}
+    tenent:{},
+    steps:[]
   },
 
   /**
@@ -259,6 +260,9 @@ Page({
   hideBasic2() {
     this.toggle('basic2', false);
   },
+  hideBasic3() {
+    this.toggle('basic3', false);
+  },
   roomEdit:function(e){
     var xy=e.currentTarget.dataset;
     var room=this.data.houseList[xy.x].rooms[xy.y];
@@ -424,6 +428,17 @@ Page({
             })
            },500)
       }
+    })
+  },
+  roomLog(e){
+    var id=e.currentTarget.dataset.id;
+    this.toggle('basic3', true);
+    const that=this;
+    app.get("/Home/GetRoomLog",{roomId:id},function(data){
+      const res=data.map(m=>{
+        return {text:m.Type+"  "+dater.dateFormat("YYYY-mm-dd HH:MM:SS",new Date(m.InsertDate)),desc:m.Detail};
+      })
+      that.setData({steps:res});
     })
   }
 })

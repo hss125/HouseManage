@@ -283,10 +283,11 @@
                       <view class="col" wx:if="{{r.Status==1}}">交租方式: {{r.PayRentType}} 押金({{r.Deposit}})</view>
                       <view class="col" wx:if="{{r.Status==1}}">合同日期: {{r.ContractDate}} 至 {{r.Deadline}}(剩{{dater.getDays(r.Deadline)}}天)</view>
                       <view class="col" wx:if="{{r.Status==1}}">备注: {{r.Remarks}}</view>
-                      <view class="d-bottom" wx:if="{{r.Status==1}}">
-                        <view class="my-btn" data-id="{{r.Id}}" data-x="{{index}}" data-y="{{index1}}" bindtap="roomEdit">编辑</view>
-                        <view class="my-btn" data-id="{{r.Id}}" bindtap="checkOut">退房</view>
-                        <view class="my-btn"  wx:if="{{!r.TenantId && !r.delete}}" data-id="{{r.Id}}" bindtap="creatTenant" data-x="{{index}}" data-y="{{index1}}">生成租客账号</view>
+                      <view class="d-bottom">
+                        <view wx:if="{{r.Status==1}}" class="my-btn" data-id="{{r.Id}}" data-x="{{index}}" data-y="{{index1}}" bindtap="roomEdit">编辑</view>
+                        <view wx:if="{{r.Status==1}}" class="my-btn" data-id="{{r.Id}}" bindtap="checkOut">退房</view>
+                        <view class="my-btn"  wx:if="{{!r.TenantId && !r.delete&&r.Status==1}}" data-id="{{r.Id}}" bindtap="creatTenant" data-x="{{index}}" data-y="{{index1}}">生成租客账号</view>
+                        <view class="my-btn" data-id="{{r.Id}}" bindtap="roomLog">记录</view>
                       </view>
                     </view>
                 </view>                  
@@ -383,7 +384,19 @@
     </view>    
   </van-popup>
 </view>
-
+<van-popup
+    show="{{ show.basic3 }}"
+     custom-style="height:calc(100% - 20px);width:calc(100% - 20px);background:rgb(248, 248, 250);"
+    bind:close="hideBasic3" closeable
+  >
+    <view class="pop-con">
+        <view class="title">历史记录</view>
+        <view  class="pop-main" style="height: calc(100vh - 60px);">  
+          <van-steps direction="vertical" :active="0" steps="{{steps}}">
+          </van-steps>           
+        </view>
+    </view>    
+  </van-popup>
 
       
   <view style="position: fixed;left: -600px;"><canvas style="width: {{cw}}px; height: {{ch}}px;" canvas-id="firstCanvas"></canvas></view>

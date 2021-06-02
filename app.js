@@ -39,7 +39,6 @@ App({
   }, 
   globalData: {
     userInfo: {name:""},
-    //baseUrl:"https://www.hss1129.cn/"
     baseUrl:"http://localhost:53675/"
     //baseUrl:"https://www.songshan.work/"
   },

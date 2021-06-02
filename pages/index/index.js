@@ -64,7 +64,7 @@ Page({
       title:room.house.Community+room.house.Building+room.room.Name+" 是否确定退房！",
       success:function(res){
           if (res.confirm) {
-            app.request("/Tenant/CheckOut",{id:id},function(){
+            app.request("/Tenant/CheckOut",{id:room.room.Id},function(){
               wx.showToast({
                 title: "退房成功！",
               })
@@ -131,7 +131,14 @@ Page({
    var that=this;
     var rent=this.data.rent;
     rent.Id=this.data.roomId;
-    app.request("/Tenant/RentOut/",rent,function(){
+    if(!rent.PayRentDate){
+      wx.showToast({
+        title: "请选择下次交租日期！",
+        icon:"none"
+      })
+      return;
+    }
+    app.request("/Tenant/RentOut/",rent,function(res){
       that.getTenant();
       that.setData({rent:{ContractDate:dater.dateFormat("YYYY-mm-dd",new Date()),Expiration:12,PayRentMonths:1,PayRentType:"交一压一"}});
     })

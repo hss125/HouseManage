@@ -14,8 +14,8 @@
 .tab-con{padding-top: 10px;}
 .handle{text-align: left;padding-right: 5px;}
 .handle van-icon{margin-right: 15px;margin-left: 6px;color: #0061b2;vertical-align: middle;margin-top: -2px;transform: scale(1.2);}
-.pop-main{height: calc(100vh - 112px);overflow-y: auto;}
-.pop-con .title{font-size: 14px;line-height: 36px;padding-left: 8px;}
+.pop-main{height: calc(100vh - 112px);overflow-y: auto;padding-bottom: 20px;box-sizing: border-box;}
+.pop-con .title{font-size: 14px;line-height: 19px; padding: 8px 0; padding-left: 8px;}
 .pop-bottom{box-shadow: 0 -3px 3px rgba(0,0,0,.1);position: absolute;bottom: 0;left: 0;
   right: 0; padding: 4px; }
 van-popup .van-popup__close-icon--top-right {top: 8px;right: 10px;}
